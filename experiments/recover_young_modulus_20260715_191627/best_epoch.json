@@ -1,0 +1,12 @@
+{
+    "best_epoch": 1,
+    "best_k_l2_error": 1.308810830116272,
+    "u_l2_error_at_best_epoch": 1.1367526054382324,
+    "total_loss_at_best_epoch": 168.10733032226562,
+    "data_loss_at_best_epoch": 0.5474048137664795,
+    "boundary_loss_at_best_epoch": 0.011039496213197709,
+    "pde_loss_at_best_epoch": 83.72476577758789,
+    "final_k_l2_error": 13.467546463012695,
+    "final_u_l2_error": 0.982032060623169,
+    "total_training_time_seconds": 79.37706303596497
+}
