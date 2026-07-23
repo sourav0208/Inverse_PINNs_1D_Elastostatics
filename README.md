@@ -94,36 +94,36 @@ The dataset contains displacement observations at **500 randomly sampled sensor 
 
 The model learns differentiable approximations
 
-\[
-u_\theta(x) \approx u(x),
-\qquad
-k_\phi(x) \approx k(x).
-\]
+    \[
+    u_\theta(x) \approx u(x),
+    \qquad
+    k_\phi(x) \approx k(x).
+    \]
 
-A **Softplus** output transformation is used for the modulus prediction so that
+    A **Softplus** output transformation is used for the modulus prediction so that
 
-\[
-k_\phi(x)>0,
-\]
+    \[
+    k_\phi(x)>0,
+    \]
 
 which is physically consistent with a positive Young's modulus.
 
 Automatic differentiation is used to evaluate
 
-\[
-\frac{du_\theta}{dx}
-\]
+    \[
+    \frac{du_\theta}{dx}
+    \]
 
-and the PDE residual
+    and the PDE residual
 
-\[
-r_{\theta,\phi}(x)
-=
--\frac{d}{dx}
-\left(
-k_\phi(x)\frac{du_\theta(x)}{dx}
-\right)-f.
-\]
+    \[
+    r_{\theta,\phi}(x)
+    =
+    -\frac{d}{dx}
+    \left(
+    k_\phi(x)\frac{du_\theta(x)}{dx}
+    \right)-f.
+    \]
 
 The unknown modulus is therefore not fitted from displacement data alone. It must also produce a displacement field that is consistent with the governing physics.
 
@@ -162,51 +162,51 @@ flowchart LR
 
 Training minimises a weighted combination of three objectives:
 
-\[
-\mathcal{L}
-=
-w_{\mathrm{data}}\mathcal{L}_{\mathrm{data}}
-+
-w_{\mathrm{bc}}\mathcal{L}_{\mathrm{bc}}
-+
-w_{\mathrm{pde}}\mathcal{L}_{\mathrm{pde}}.
-\]
+    \[
+    \mathcal{L}
+    =
+    w_{\mathrm{data}}\mathcal{L}_{\mathrm{data}}
+    +
+    w_{\mathrm{bc}}\mathcal{L}_{\mathrm{bc}}
+    +
+    w_{\mathrm{pde}}\mathcal{L}_{\mathrm{pde}}.
+    \]
 
 ### Displacement data loss
 
-\[
-\mathcal{L}_{\mathrm{data}}
-=
-\frac{1}{N_u}
-\sum_{i=1}^{N_u}
-\left|
-u_\theta(x_i)-u_i^{\mathrm{obs}}
-\right|^2.
-\]
+    \[
+    \mathcal{L}_{\mathrm{data}}
+    =
+    \frac{1}{N_u}
+    \sum_{i=1}^{N_u}
+    \left|
+    u_\theta(x_i)-u_i^{\mathrm{obs}}
+    \right|^2.
+    \]
 
 This term fits the measured displacement observations.
 
 ### Boundary-condition loss
 
-\[
-\mathcal{L}_{\mathrm{bc}}
-=
-|u_\theta(0)|^2+|u_\theta(L)|^2.
-\]
+    \[
+    \mathcal{L}_{\mathrm{bc}}
+    =
+    |u_\theta(0)|^2+|u_\theta(L)|^2.
+    \]
 
 This term enforces the prescribed displacements at the two ends of the rod.
 
 ### PDE residual loss
 
-\[
-\mathcal{L}_{\mathrm{pde}}
-=
-\frac{1}{N_f}
-\sum_{j=1}^{N_f}
-\left|
-r_{\theta,\phi}(x_j)
-\right|^2.
-\]
+    \[
+    \mathcal{L}_{\mathrm{pde}}
+    =
+    \frac{1}{N_f}
+    \sum_{j=1}^{N_f}
+    \left|
+    r_{\theta,\phi}(x_j)
+    \right|^2.
+    \]
 
 This term enforces elastostatic equilibrium at collocation points inside the domain.
 
